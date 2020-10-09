@@ -1,18 +1,11 @@
 package com.taraniuk.github.api.paging_library.utils
 
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
-import com.taraniuk.github.api.paging_library.R
 import com.taraniuk.github.api.paging_library.data.retrofit.model.Data
 
-class InstantRxAdapter : PagingDataAdapter<Data, MovieGridViewHolder>(
-    COMPARATOR
-) {
+class InstantRxAdapter : PagingDataAdapter<Data, MovieGridViewHolder>(COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieGridViewHolder {
         return MovieGridViewHolder.create(
@@ -39,28 +32,3 @@ class InstantRxAdapter : PagingDataAdapter<Data, MovieGridViewHolder>(
     }
 }
 
-class MovieGridViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-    val t1 : TextView  = view.findViewById(R.id.textView)
-    val t2 : TextView  = view.findViewById(R.id.textView3)
-    val t3 : TextView  = view.findViewById(R.id.textView2)
-    fun bind(movie: Data) {
-
-            t1.text = movie.name
-            t2.text = movie.name
-            t3.text = movie.name
-
-    }
-
-    companion object {
-        fun create(parent: ViewGroup): MovieGridViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_passegers,  parent,false)
-
-
-            return MovieGridViewHolder(
-                view
-            )
-        }
-    }
-}

@@ -1,5 +1,6 @@
 package com.taraniuk.github.api.paging_library.utils
 
+import android.util.Log
 import androidx.paging.rxjava2.RxPagingSource
 import com.taraniuk.github.api.paging_library.data.repository.InstantRepositoryImpl
 import com.taraniuk.github.api.paging_library.data.retrofit.model.Data
@@ -13,8 +14,10 @@ class InstantPagingSource @Inject constructor(private val repository: InstantRep
 
     override val keyReuseSupported = true
 
-    override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, Data>>{
+    override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, Data>> {
         val position = params.key ?: 1
+
+        Log.d("PAGE", "loadSingle: $position")
 
         return repository.getAll(position, params.loadSize)
             .subscribeOn(Schedulers.io())
@@ -26,7 +29,7 @@ class InstantPagingSource @Inject constructor(private val repository: InstantRep
         return LoadResult.Page(
             data = data,
             prevKey = if (position == 1) null else position - 1,
-            nextKey = if (position == data.size) null else position + 1
+            nextKey = if (data.isEmpty()) null else position + 1
         )
     }
 }
