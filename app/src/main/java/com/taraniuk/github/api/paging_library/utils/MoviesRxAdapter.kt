@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.taraniuk.github.api.paging_library.R
 import com.taraniuk.github.api.paging_library.data.retrofit.model.Data
 
-class MoviesRxAdapter : PagingDataAdapter<Data, MovieGridViewHolder>(
+class InstantRxAdapter : PagingDataAdapter<Data, MovieGridViewHolder>(
     COMPARATOR
 ) {
 
@@ -45,11 +45,11 @@ class MovieGridViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val t2 : TextView  = view.findViewById(R.id.textView3)
     val t3 : TextView  = view.findViewById(R.id.textView2)
     fun bind(movie: Data) {
-        with(movie) {
+
             t1.text = movie.name
             t2.text = movie.name
             t3.text = movie.name
-        }
+
     }
 
     companion object {
