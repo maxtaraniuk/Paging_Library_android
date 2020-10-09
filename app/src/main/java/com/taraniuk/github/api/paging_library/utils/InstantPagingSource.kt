@@ -16,15 +16,12 @@ class InstantPagingSource @Inject constructor(private val repository: InstantRep
     override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, Data>>{
         val position = params.key ?: 1
 
-        return repository.getAll(1, 10)
+        return repository.getAll(position, params.loadSize)
             .subscribeOn(Schedulers.io())
             .map { toLoadResult(it.data, position) }
             .onErrorReturn { LoadResult.Error(it) }
     }
 
-    fun ffff(retry: () -> Unit){
-
-    }
     private fun toLoadResult(data: List<Data>, position: Int): LoadResult<Int, Data> {
         return LoadResult.Page(
             data = data,

@@ -31,7 +31,7 @@ class InstantRepositoryImpl @Inject constructor(private val retrofit: Retrofit) 
                 maxSize = 30,
                 prefetchDistance = 5,
                 initialLoadSize = 40),
-            pagingSourceFactory = { InstantPagingSource() }
+            pagingSourceFactory = { InstantPagingSource(this) }
         ).flowable
     }
 
