@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var viewModel: MainActivityVIewModel
 
     lateinit var recycler: RecyclerView
+    private val adapter = DataAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,19 +30,19 @@ class MainActivity : AppCompatActivity() {
 
         recycler = findViewById(R.id.rv_passengers)
         recycler.layoutManager = LinearLayoutManager(this)
+        recycler.adapter = adapter
         run()
+
     }
 
 
     private fun run() {
         lifecycleScope.launch {
             val a = viewModel.getData()
-            val adapter = DataAdapter()
             a.collect {
                 adapter.submitData(it)
                 Log.d("111", "run: $it")
             }
-            recycler.adapter = adapter
         }
     }
 }
