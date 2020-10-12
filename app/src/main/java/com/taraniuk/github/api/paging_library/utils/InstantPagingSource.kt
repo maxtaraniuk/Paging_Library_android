@@ -12,13 +12,10 @@ import javax.inject.Inject
 class InstantPagingSource @Inject constructor(private val repository: InstantRepositoryImpl) :
     RxPagingSource<Int, Data>() {
 
-    override val keyReuseSupported = true
-
     override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, Data>> {
-        val position = params.key ?: 1
+        val position = params.key ?: 0
 
         Log.d("PAGE", "loadSingle: $position")
-
         return repository.getAll(position, params.loadSize)
             .subscribeOn(Schedulers.io())
             .map { toLoadResult(it.data, position) }
@@ -28,8 +25,8 @@ class InstantPagingSource @Inject constructor(private val repository: InstantRep
     private fun toLoadResult(data: List<Data>, position: Int): LoadResult<Int, Data> {
         return LoadResult.Page(
             data = data,
-            prevKey = if (position == 1) null else position - 1,
-            nextKey = if (data.isEmpty()) null else position + 1
+            prevKey = if (position == 0) null else position - 1,
+            nextKey = if (data.isNullOrEmpty()) null else position + 1
         )
     }
 }

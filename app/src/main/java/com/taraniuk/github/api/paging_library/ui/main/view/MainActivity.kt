@@ -31,5 +31,6 @@ class MainActivity : AppCompatActivity() {
         viewModel.pagingData.observe(this, {
             rxAdapter.submitData(lifecycle, it)
         })
+
     }
 }

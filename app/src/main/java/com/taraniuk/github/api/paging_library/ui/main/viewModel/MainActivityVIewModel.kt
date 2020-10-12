@@ -7,6 +7,7 @@ import androidx.paging.rxjava2.cachedIn
 import com.taraniuk.github.api.paging_library.data.repository.InstantRepositoryImpl
 import com.taraniuk.github.api.paging_library.data.retrofit.model.Data
 import com.taraniuk.github.api.paging_library.ui.base.viewModel.BaseModel
+import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
 class MainActivityVIewModel @Inject constructor(private val repository: InstantRepositoryImpl) :
@@ -21,6 +22,7 @@ class MainActivityVIewModel @Inject constructor(private val repository: InstantR
     private fun getResult() {
         disposable = repository
             .getMovies()
+            .observeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)
             .subscribe({
                 pagingData.value = it
