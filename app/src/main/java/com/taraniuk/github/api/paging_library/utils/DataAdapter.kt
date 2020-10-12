@@ -23,7 +23,7 @@ class DataAdapter : PagingDataAdapter<Data, RecyclerView.ViewHolder>(DATA_COMPAR
     companion object {
         private val DATA_COMPARATOR = object : DiffUtil.ItemCallback<Data>() {
             override fun areItemsTheSame(oldItem: Data, newItem: Data): Boolean =
-                oldItem.name == newItem.name
+                oldItem._id == newItem._id
 
             override fun areContentsTheSame(oldItem: Data, newItem: Data): Boolean =
                 oldItem == newItem
