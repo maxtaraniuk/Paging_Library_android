@@ -19,8 +19,10 @@ package com.taraniuk.github.api.paging_library.utils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.taraniuk.github.api.paging_library.R
 import com.taraniuk.github.api.paging_library.data.retrofit.model.Data
 
@@ -28,9 +30,9 @@ import com.taraniuk.github.api.paging_library.data.retrofit.model.Data
  * View Holder for a [Repo] RecyclerView list item.
  */
 class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    private val t1: TextView = view.findViewById(R.id.tv_title)
-    private val t2: TextView = view.findViewById(R.id.tv_sub_title)
-    private val t3: TextView = view.findViewById(R.id.tv_title_3)
+    private val t1: TextView = view.findViewById(R.id.tv_name)
+    private val t2: TextView = view.findViewById(R.id.tv_name)
+    private val logo: ImageView = view.findViewById(R.id.iv_logo)
 
 
     private var repo: Data? = null
@@ -61,12 +63,13 @@ class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         this.repo = repo
         t1.text = repo.name
 
-        // if the description is missing, hide the TextView
-        var descriptionVisibility = View.GONE
-        t2.text = repo.name
-        descriptionVisibility = View.VISIBLE
-        t2.visibility = descriptionVisibility
+        Glide.with(itemView.context)
+            .load(repo.airline.logo)
+            .placeholder(R.drawable.ic_launcher_foreground)
+            .error(R.drawable.ic_launcher_background)
+            .into(logo)
 
+        t2.text = repo.name
     }
 
     companion object {
