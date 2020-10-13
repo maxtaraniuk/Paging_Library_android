@@ -22,7 +22,7 @@ class InstantRepositoryImpl @Inject constructor(private val retrofit: Retrofit) 
         return retrofit.create(InstantApi::class.java).getAll(page, size)
     }
 
-    fun getMovies(): Flowable<PagingData<Data>> {
+    fun getData(): Flowable<PagingData<Data>> {
         return Pager(
             config = PagingConfig(
                 pageSize = PAGE_SIZE,
