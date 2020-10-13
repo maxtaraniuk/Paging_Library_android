@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="zero_value">0dp</dimen>
+    <dimen name="divider_size">3dp</dimen>
+    <dimen name="size_x">10dp</dimen>
+    <dimen name="size_xl">20dp</dimen>
+
+    <dimen name="text_size_x">20sp</dimen>
+</resources>
