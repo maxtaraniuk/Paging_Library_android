@@ -25,14 +25,22 @@ class InstantRepositoryImpl @Inject constructor(private val retrofit: Retrofit) 
     fun getMovies(): Flowable<PagingData<Data>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 20,
-                enablePlaceholders = true,
-                maxSize = 30,
-                prefetchDistance = 5,
-                initialLoadSize = 40
+                pageSize = PAGE_SIZE,
+                enablePlaceholders = ENABLE_PLACEHOLDERS,
+                maxSize = MAX_SIZE,
+                prefetchDistance = PREFETCH_DISTANCE,
+                initialLoadSize = INITIAL_LOAD_SIZE
             ),
             pagingSourceFactory = { InstantPagingSource(this) }
         ).flowable
+    }
+
+    companion object {
+        const val PAGE_SIZE = 10
+        const val MAX_SIZE = 30
+        const val INITIAL_LOAD_SIZE = 40
+        const val PREFETCH_DISTANCE = 5
+        const val ENABLE_PLACEHOLDERS = false
     }
 
 }
