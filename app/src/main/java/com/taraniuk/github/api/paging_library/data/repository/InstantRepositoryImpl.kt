@@ -14,11 +14,17 @@ import io.reactivex.Single
 import retrofit2.Retrofit
 import javax.inject.Inject
 
+private const val PAGE_SIZE = 10
+private const val MAX_SIZE = 30
+private const val INITIAL_LOAD_SIZE = 40
+private const val PREFETCH_DISTANCE = 5
+private const val ENABLE_PLACEHOLDERS = false
+
 class InstantRepositoryImpl @Inject constructor(private val retrofit: Retrofit) :
     InstantRepositoryApi {
 
 
-    override fun getAll(page: Int, size: Int): Single<Model> {
+    override fun getAllAirline(page: Int, size: Int): Single<Model> {
         return retrofit.create(InstantApi::class.java).getAll(page, size)
     }
 
@@ -34,13 +40,4 @@ class InstantRepositoryImpl @Inject constructor(private val retrofit: Retrofit) 
             pagingSourceFactory = { InstantPagingSource(this) }
         ).flowable
     }
-
-    companion object {
-        const val PAGE_SIZE = 10
-        const val MAX_SIZE = 30
-        const val INITIAL_LOAD_SIZE = 40
-        const val PREFETCH_DISTANCE = 5
-        const val ENABLE_PLACEHOLDERS = false
-    }
-
 }

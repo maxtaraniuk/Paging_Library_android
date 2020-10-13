@@ -35,7 +35,7 @@ class MovieGridViewHolder(private val view: View) : RecyclerView.ViewHolder(view
     companion object {
         fun create(parent: ViewGroup): MovieGridViewHolder {
             val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_passegers, parent, false)
+                .inflate(R.layout.item_airlines, parent, false)
             return MovieGridViewHolder(view)
         }
     }
