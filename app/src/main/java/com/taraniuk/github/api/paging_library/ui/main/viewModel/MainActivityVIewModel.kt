@@ -32,7 +32,7 @@ class MainActivityVIewModel @Inject constructor(
             .subscribe({
                 pagingData.value = it
             }, {
-                Toast.makeText(context,"Some things wrong", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,"Something is wrong", Toast.LENGTH_SHORT).show()
             })
     }
 }
