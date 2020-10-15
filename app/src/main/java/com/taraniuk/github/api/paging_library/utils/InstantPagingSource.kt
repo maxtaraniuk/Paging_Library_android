@@ -16,7 +16,7 @@ class InstantPagingSource @Inject constructor(private val repository: InstantRep
         val position = params.key ?: 0
 
         Log.d("PAGE", "loadSingle: $position")
-        return repository.getAllAirline(position, params.loadSize)
+        return repository.getAllAirlines(position, params.loadSize)
             .subscribeOn(Schedulers.io())
             .map { toLoadResult(it.data, position) }
             .onErrorReturn { LoadResult.Error(it) }

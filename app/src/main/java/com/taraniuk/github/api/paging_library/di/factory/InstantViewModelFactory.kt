@@ -1,4 +1,4 @@
-package com.taraniuk.github.api.client.di.factory
+package com.taraniuk.github.api.paging_library.di.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

@@ -5,6 +5,6 @@ import io.reactivex.Single
 
 interface InstantRepositoryApi {
 
-    fun getAllAirline(page: Int, size: Int): Single<Model>
+    fun getAllAirlines(page: Int, size: Int): Single<Model>
 
 }

@@ -24,7 +24,7 @@ class InstantRepositoryImpl @Inject constructor(private val retrofit: Retrofit) 
     InstantRepositoryApi {
 
 
-    override fun getAllAirline(page: Int, size: Int): Single<Model> {
+    override fun getAllAirlines(page: Int, size: Int): Single<Model> {
         return retrofit.create(InstantApi::class.java).getAll(page, size)
     }
 
