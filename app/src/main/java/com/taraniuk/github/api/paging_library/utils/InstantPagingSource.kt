@@ -1,6 +1,5 @@
 package com.taraniuk.github.api.paging_library.utils
 
-import android.util.Log
 import androidx.paging.rxjava2.RxPagingSource
 import com.taraniuk.github.api.paging_library.data.repository.InstantRepositoryImpl
 import com.taraniuk.github.api.paging_library.data.retrofit.model.Data
@@ -15,7 +14,6 @@ class InstantPagingSource @Inject constructor(private val repository: InstantRep
     override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, Data>> {
         val position = params.key ?: 0
 
-        Log.d("PAGE", "loadSingle: $position")
         return repository.getAllAirlines(position, params.loadSize)
             .subscribeOn(Schedulers.io())
             .map { toLoadResult(it.data, position) }
