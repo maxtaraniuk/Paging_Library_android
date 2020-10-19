@@ -1,6 +1,5 @@
 package com.taraniuk.github.api.paging_library.ui.main.viewModel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -9,9 +8,8 @@ import com.taraniuk.github.api.paging_library.data.repository.InstantRepositoryI
 import com.taraniuk.github.api.paging_library.data.retrofit.model.Data
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import javax.inject.Inject
 
-class MainActivityViewModel @Inject constructor(
+class MainActivityViewModel(
     private val repository: InstantRepositoryImpl
 ) : ViewModel() {
 
