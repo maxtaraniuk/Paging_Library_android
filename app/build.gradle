@@ -33,19 +33,14 @@ android {
         jvmTarget = "1.8"
     }
 
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
-
-
 
 dependencies {
     def paging_version = "3.0.0-alpha07"
-    def room_version = "2.3.0-alpha02"
     def dagger_version = "2.27"
-    def nav_version = "2.3.0"
-    def rx_version = "3.0.0"
-    def rx_android_version = "3.0.4"
-    def rx_adapter_version = "2.9.0"
-    def rx_binding_version = "4.0.0"
     def material_version = "1.2.0"
     def retrofit_version = "2.9.0"
     def gson_version = "2.3.0"
@@ -66,6 +61,14 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
 
+    testImplementation "io.mockk:mockk:1.9.3"
+    androidTestImplementation "org.mockito:mockito-android:3.5.13"
+    testImplementation 'org.mockito:mockito-inline:2.13.0'
+    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0-RC3'
+    testImplementation "org.mockito:mockito-core:3.5.13"
+
+
+
     //constraint layout
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
 
@@ -80,11 +83,6 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
     implementation "com.google.dagger:dagger:$dagger_version"
-    //RxJava 3
-//    implementation "io.reactivex.rxjava3:rxandroid:$rx_version"
-//    implementation "io.reactivex.rxjava3:rxjava:$rx_android_version"
-//    implementation "com.jakewharton.rxbinding4:rxbinding:$rx_binding_version"
-//    implementation "com.jakewharton.rxbinding4:rxbinding-material:$rx_binding_version"
 
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.19'

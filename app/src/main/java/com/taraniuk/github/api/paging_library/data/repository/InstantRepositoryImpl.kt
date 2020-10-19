@@ -25,10 +25,10 @@ class InstantRepositoryImpl @Inject constructor(private val retrofit: Retrofit) 
 
 
     override fun getAllAirlines(page: Int, size: Int): Single<Model> {
-        return retrofit.create(InstantApi::class.java).getAll(page, size)
+        return retrofit.create(InstantApi::class.java).getAllAirlines(page, size)
     }
 
-    fun getData(): Flowable<PagingData<Data>> {
+    override fun getData(): Flowable<PagingData<Data>> {
         return Pager(
             config = PagingConfig(
                 pageSize = PAGE_SIZE,

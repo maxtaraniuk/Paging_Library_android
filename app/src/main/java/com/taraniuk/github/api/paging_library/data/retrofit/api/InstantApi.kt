@@ -8,7 +8,7 @@ import retrofit2.http.Query
 interface InstantApi {
 
     @GET("v1/passenger")
-    fun getAll(
+    fun getAllAirlines(
         @Query("page") page: Int,
         @Query("size") size: Int,
     ): Single<Model>
