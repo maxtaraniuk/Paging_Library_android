@@ -5,24 +5,21 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.taraniuk.github.api.paging_library.InstantApp
 import com.taraniuk.github.api.paging_library.R
 import com.taraniuk.github.api.paging_library.ui.main.viewModel.MainActivityViewModel
 import com.taraniuk.github.api.paging_library.utils.InstantRxAdapter
 import io.reactivex.disposables.Disposable
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var viewModel: MainActivityViewModel
+    private val viewModel: MainActivityViewModel by inject()
     private val rxAdapter = InstantRxAdapter()
     private lateinit var recyclerView: RecyclerView
     private var disposable: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        InstantApp.daggerComponent.inject(this)
         setContentView(R.layout.activity_main)
         recyclerView = findViewById(R.id.rv_passengers)
         recyclerView.layoutManager = LinearLayoutManager(this)

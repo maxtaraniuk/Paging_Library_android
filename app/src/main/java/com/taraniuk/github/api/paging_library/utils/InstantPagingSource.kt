@@ -6,10 +6,9 @@ import com.taraniuk.github.api.paging_library.data.repository.InstantRepositoryI
 import com.taraniuk.github.api.paging_library.data.retrofit.model.Data
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
-import javax.inject.Inject
 
 
-class InstantPagingSource @Inject constructor(private val repository: InstantRepositoryImpl) :
+class InstantPagingSource(private val repository: InstantRepositoryImpl) :
     RxPagingSource<Int, Data>() {
 
     override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, Data>> {
