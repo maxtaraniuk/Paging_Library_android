@@ -1,46 +1,41 @@
 package com.taraniuk.github.api.paging_library.ui.main.view
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.taraniuk.github.api.paging_library.InstantApp
 import com.taraniuk.github.api.paging_library.R
 import com.taraniuk.github.api.paging_library.ui.main.viewModel.MainActivityViewModel
-import com.taraniuk.github.api.paging_library.utils.InstantRxAdapter
-import io.reactivex.disposables.Disposable
-import javax.inject.Inject
+import com.taraniuk.github.api.paging_library.utils.DataAdapter
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var viewModel: MainActivityViewModel
-    private val rxAdapter = InstantRxAdapter()
-    private lateinit var recyclerView: RecyclerView
-    private var disposable: Disposable? = null
+    private val viewModel: MainActivityViewModel by inject()
+
+    lateinit var recycler: RecyclerView
+    private val adapter = DataAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        InstantApp.daggerComponent.inject(this)
         setContentView(R.layout.activity_main)
-        recyclerView = findViewById(R.id.rv_passengers)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = rxAdapter
-        subscribeToPagingData()
+
+        recycler = findViewById(R.id.rv_passengers)
+        recycler.layoutManager = LinearLayoutManager(this)
+        recycler.adapter = adapter
+        run()
     }
 
-    private fun subscribeToPagingData() {
-        disposable = viewModel.getResult()
-            .subscribe({
-                rxAdapter.submitData(lifecycle, it)
-            }, {
-                Toast.makeText(this, "Something is wrong", Toast.LENGTH_SHORT).show()
-            })
-    }
+    private fun run() {
+        lifecycleScope.launch {
+            val pagingData = viewModel.getData()
 
-    override fun onDestroy() {
-        super.onDestroy()
-        disposable?.dispose()
+            pagingData.collect {
+                adapter.submitData(it)
+            }
+        }
     }
 }

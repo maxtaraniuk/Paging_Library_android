@@ -1,32 +1,29 @@
 package com.taraniuk.github.api.paging_library.utils
 
-import android.util.Log
-import androidx.paging.rxjava2.RxPagingSource
+import androidx.paging.PagingSource
+import com.bumptech.glide.load.HttpException
+import com.taraniuk.github.api.paging_library.data.ktor.model.Data
 import com.taraniuk.github.api.paging_library.data.repository.InstantRepositoryImpl
-import com.taraniuk.github.api.paging_library.data.retrofit.model.Data
-import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
-import javax.inject.Inject
+import java.io.IOException
 
+class InstantPagingSource(private val repository: InstantRepositoryImpl) :
+    PagingSource<Int, Data>() {
 
-class InstantPagingSource @Inject constructor(private val repository: InstantRepositoryImpl) :
-    RxPagingSource<Int, Data>() {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Data> {
+        val position = params.key ?: 1
 
-    override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, Data>> {
-        val position = params.key ?: 0
-
-        Log.d("PAGE", "loadSingle: $position")
-        return repository.getAllAirlines(position, params.loadSize)
-            .subscribeOn(Schedulers.io())
-            .map { toLoadResult(it.data, position) }
-            .onErrorReturn { LoadResult.Error(it) }
-    }
-
-    private fun toLoadResult(data: List<Data>, position: Int): LoadResult<Int, Data> {
-        return LoadResult.Page(
-            data = data,
-            prevKey = if (position == 0) null else position - 1,
-            nextKey = if (data.isNullOrEmpty()) null else position + 1
-        )
+        return try {
+            val response = repository.getAllAirlines(position, params.loadSize)
+            val repos = response.data
+            LoadResult.Page(
+                data = repos,
+                prevKey = if (position == 1) null else position - 1,
+                nextKey = if (repos.isEmpty()) null else position + 1
+            )
+        } catch (exception: IOException) {
+            return LoadResult.Error(exception)
+        } catch (exception: HttpException) {
+            return LoadResult.Error(exception)
+        }
     }
 }

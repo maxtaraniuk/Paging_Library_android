@@ -1,4 +1,4 @@
-package com.taraniuk.github.api.paging_library.data.retrofit.model
+package com.taraniuk.github.api.paging_library.data.ktor.model
 
 data class Data(
     var __v: Int,

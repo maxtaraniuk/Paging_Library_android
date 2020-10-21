@@ -1,10 +1,9 @@
 package com.taraniuk.github.api.paging_library.data.repository
 
-import com.taraniuk.github.api.paging_library.data.retrofit.model.Model
-import io.reactivex.Single
+import com.taraniuk.github.api.paging_library.data.ktor.model.Model
 
 interface InstantRepositoryApi {
 
-    fun getAllAirlines(page: Int, size: Int): Single<Model>
+    suspend fun getAllAirlines(page: Int, size: Int): Model
 
 }

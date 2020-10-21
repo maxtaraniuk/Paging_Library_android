@@ -1,25 +1,19 @@
 package com.taraniuk.github.api.paging_library.ui.main.viewModel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
-import androidx.paging.rxjava2.cachedIn
+import androidx.paging.cachedIn
+import com.taraniuk.github.api.paging_library.data.ktor.model.Data
 import com.taraniuk.github.api.paging_library.data.repository.InstantRepositoryImpl
-import com.taraniuk.github.api.paging_library.data.retrofit.model.Data
-import io.reactivex.Flowable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
 
-class MainActivityViewModel @Inject constructor(
-    private val repository: InstantRepositoryImpl
-) : ViewModel() {
+class MainActivityViewModel(private val repository: InstantRepositoryImpl) :
+    ViewModel() {
 
-    fun getResult(): Flowable<PagingData<Data>> {
-        return repository
-            .getData()
-            .observeOn(AndroidSchedulers.mainThread())
-            .cachedIn(viewModelScope)
-
+    fun getData(): Flow<PagingData<Data>> {
+        return repository.getAllItemsPaging().cachedIn(viewModelScope)
     }
+
 }
+

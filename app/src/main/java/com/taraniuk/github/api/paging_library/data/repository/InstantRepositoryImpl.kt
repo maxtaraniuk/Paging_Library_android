@@ -4,40 +4,29 @@ package com.taraniuk.github.api.paging_library.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.rxjava2.flowable
-import com.taraniuk.github.api.paging_library.data.retrofit.api.InstantApi
-import com.taraniuk.github.api.paging_library.data.retrofit.model.Data
-import com.taraniuk.github.api.paging_library.data.retrofit.model.Model
+import com.taraniuk.github.api.paging_library.data.ktor.model.Data
+import com.taraniuk.github.api.paging_library.data.ktor.model.Model
 import com.taraniuk.github.api.paging_library.utils.InstantPagingSource
-import io.reactivex.Flowable
-import io.reactivex.Single
-import retrofit2.Retrofit
-import javax.inject.Inject
+import io.ktor.client.*
+import io.ktor.client.request.*
+import kotlinx.coroutines.flow.Flow
 
-private const val PAGE_SIZE = 10
-private const val MAX_SIZE = 30
-private const val INITIAL_LOAD_SIZE = 40
-private const val PREFETCH_DISTANCE = 5
-private const val ENABLE_PLACEHOLDERS = false
+private const val NETWORK_PAGE_SIZE = 50
+private const val BASE_URL = "https://api.instantwebtools.net/"
 
-class InstantRepositoryImpl @Inject constructor(private val retrofit: Retrofit) :
-    InstantRepositoryApi {
+class InstantRepositoryImpl(private val httpClient: HttpClient) : InstantRepositoryApi {
 
-
-    override fun getAllAirlines(page: Int, size: Int): Single<Model> {
-        return retrofit.create(InstantApi::class.java).getAll(page, size)
+    override suspend fun getAllAirlines(page: Int, size: Int): Model {
+        return httpClient.get("${BASE_URL}v1/passenger?page=$page&size=$size")
     }
 
-    fun getData(): Flowable<PagingData<Data>> {
+    fun getAllItemsPaging(): Flow<PagingData<Data>> {
         return Pager(
             config = PagingConfig(
-                pageSize = PAGE_SIZE,
-                enablePlaceholders = ENABLE_PLACEHOLDERS,
-                maxSize = MAX_SIZE,
-                prefetchDistance = PREFETCH_DISTANCE,
-                initialLoadSize = INITIAL_LOAD_SIZE
+                pageSize = NETWORK_PAGE_SIZE,
+                enablePlaceholders = false
             ),
             pagingSourceFactory = { InstantPagingSource(this) }
-        ).flowable
+        ).flow
     }
 }
