@@ -3,7 +3,7 @@ package com.taraniuk.github.api.paging_library.utils
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.taraniuk.github.api.paging_library.data.retrofit.model.Data
+import com.taraniuk.github.api.paging_library.data.ktor.model.Data
 
 class InstantRxAdapter : PagingDataAdapter<Data, MovieGridViewHolder>(COMPARATOR) {
 

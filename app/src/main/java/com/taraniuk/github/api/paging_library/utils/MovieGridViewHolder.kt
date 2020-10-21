@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.taraniuk.github.api.paging_library.R
-import com.taraniuk.github.api.paging_library.data.retrofit.model.Data
+import com.taraniuk.github.api.paging_library.data.ktor.model.Data
 
 class MovieGridViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
