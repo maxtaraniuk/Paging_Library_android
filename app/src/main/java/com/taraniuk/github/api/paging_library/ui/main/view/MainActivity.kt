@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
             pagingData.collect {
                 adapter.submitData(it)
             }
-
         }
     }
 }

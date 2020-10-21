@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2018 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taraniuk.github.api.paging_library.utils
 
 import android.view.LayoutInflater
@@ -26,36 +10,22 @@ import com.bumptech.glide.Glide
 import com.taraniuk.github.api.paging_library.R
 import com.taraniuk.github.api.paging_library.data.ktor.model.Data
 
-/**
- * View Holder for a [Repo] RecyclerView list item.
- */
 class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    private val t1: TextView = view.findViewById(R.id.tv_name)
-    private val t2: TextView = view.findViewById(R.id.tv_name)
+    private val name: TextView = view.findViewById(R.id.tv_name)
+    private val country: TextView = view.findViewById(R.id.tv_country)
+    private val city: TextView = view.findViewById(R.id.tv_city)
     private val logo: ImageView = view.findViewById(R.id.iv_logo)
 
-
-    private var repo: Data? = null
-
     fun bind(repo: Data?) {
-        if (repo == null) {
+        repo?.let {
+            name.text = repo.name
+            country.text = repo.airline.country
+            city.text = repo.airline.slogan
 
-        } else {
-            showRepoData(repo)
+            Glide.with(itemView.context)
+                .load(repo.airline.logo)
+                .into(logo)
         }
-    }
-
-    private fun showRepoData(repo: Data) {
-        this.repo = repo
-        t1.text = repo.name
-
-        Glide.with(itemView.context)
-            .load(repo.airline.logo)
-            .placeholder(R.drawable.ic_launcher_foreground)
-            .error(R.drawable.ic_launcher_background)
-            .into(logo)
-
-        t2.text = repo.name
     }
 
     companion object {

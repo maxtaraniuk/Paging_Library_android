@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.Flow
 class MainActivityViewModel(private val repository: InstantRepositoryImpl) :
     ViewModel() {
 
-
     fun getData(): Flow<PagingData<Data>> {
         return repository.getAllItemsPaging().cachedIn(viewModelScope)
     }

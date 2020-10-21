@@ -11,12 +11,10 @@ import io.ktor.client.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.flow.Flow
 
-
 private const val NETWORK_PAGE_SIZE = 50
 private const val BASE_URL = "https://api.instantwebtools.net/"
 
 class InstantRepositoryImpl(private val httpClient: HttpClient) : InstantRepositoryApi {
-
 
     override suspend fun getAllAirlines(page: Int, size: Int): Model {
         return httpClient.get("${BASE_URL}v1/passenger?page=$page&size=$size")

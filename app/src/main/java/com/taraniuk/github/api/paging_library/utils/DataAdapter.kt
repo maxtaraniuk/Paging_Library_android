@@ -27,7 +27,6 @@ class DataAdapter : PagingDataAdapter<Data, RecyclerView.ViewHolder>(DATA_COMPAR
 
             override fun areContentsTheSame(oldItem: Data, newItem: Data): Boolean =
                 oldItem == newItem
-
         }
     }
 
