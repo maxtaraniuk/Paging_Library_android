@@ -1,48 +1,42 @@
 package com.taraniuk.github.api.paging_library.ui.main.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.taraniuk.github.api.paging_library.InstantApp
 import com.taraniuk.github.api.paging_library.R
-import com.taraniuk.github.api.paging_library.ui.main.viewModel.MainActivityVIewModel
+import com.taraniuk.github.api.paging_library.ui.main.viewModel.MainActivityViewModel
 import com.taraniuk.github.api.paging_library.utils.DataAdapter
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var viewModel: MainActivityVIewModel
+    private val viewModel: MainActivityViewModel by inject()
 
     lateinit var recycler: RecyclerView
     private val adapter = DataAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        InstantApp.daggerComponent.inject(this)
         setContentView(R.layout.activity_main)
-        viewModel.getAllPages()
 
         recycler = findViewById(R.id.rv_passengers)
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = adapter
         run()
-
     }
-
 
     private fun run() {
         lifecycleScope.launch {
-            val a = viewModel.getData()
-            a.collect {
+            val pagingData = viewModel.getData()
+
+            pagingData.collect {
                 adapter.submitData(it)
-                Log.d("111", "run: $it")
             }
+
         }
     }
 }

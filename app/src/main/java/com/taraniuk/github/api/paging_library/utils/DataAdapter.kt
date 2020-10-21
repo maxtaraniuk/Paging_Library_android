@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.taraniuk.github.api.paging_library.data.retrofit.model.Data
+import com.taraniuk.github.api.paging_library.data.ktor.model.Data
 
 
 class DataAdapter : PagingDataAdapter<Data, RecyclerView.ViewHolder>(DATA_COMPARATOR) {

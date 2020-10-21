@@ -24,7 +24,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.taraniuk.github.api.paging_library.R
-import com.taraniuk.github.api.paging_library.data.retrofit.model.Data
+import com.taraniuk.github.api.paging_library.data.ktor.model.Data
 
 /**
  * View Holder for a [Repo] RecyclerView list item.
@@ -37,23 +37,9 @@ class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private var repo: Data? = null
 
-//    init {
-//        view.setOnClickListener {
-//            repo?.url.let { url ->
-//                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-//                view.context.startActivity(intent)
-//            }
-//        }
-//    }
-
     fun bind(repo: Data?) {
         if (repo == null) {
-//            val resources = itemView.resources
-//            name.text = resources.getString(R.string.loading)
-//            description.visibility = View.GONE
-//            language.visibility = View.GONE
-//            stars.text = resources.getString(R.string.unknown)
-//            forks.text = resources.getString(R.string.unknown)
+
         } else {
             showRepoData(repo)
         }

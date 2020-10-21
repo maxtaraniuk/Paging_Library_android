@@ -39,13 +39,7 @@ android {
 
 dependencies {
     def paging_version = "3.0.0-alpha07"
-    def room_version = "2.3.0-alpha02"
     def dagger_version = "2.27"
-    def nav_version = "2.3.0"
-    def rx_version = "3.0.0"
-    def rx_android_version = "3.0.4"
-    def rx_adapter_version = "2.9.0"
-    def rx_binding_version = "4.0.0"
     def material_version = "1.2.0"
     def retrofit_version = "2.9.0"
     def gson_version = "2.3.0"
@@ -68,6 +62,7 @@ dependencies {
 
     //constraint layout
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
+    implementation "org.koin:koin-android:$koin_version"
 
     //retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -76,15 +71,12 @@ dependencies {
     //material
     implementation "com.google.android.material:material:$material_version"
 
-    //dagger 2
-    kapt "com.google.dagger:dagger-compiler:$dagger_version"
-    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
-    implementation "com.google.dagger:dagger:$dagger_version"
-    //RxJava 3
-//    implementation "io.reactivex.rxjava3:rxandroid:$rx_version"
-//    implementation "io.reactivex.rxjava3:rxjava:$rx_android_version"
-//    implementation "com.jakewharton.rxbinding4:rxbinding:$rx_binding_version"
-//    implementation "com.jakewharton.rxbinding4:rxbinding-material:$rx_binding_version"
+    implementation "io.ktor:ktor-client-core:1.4.1"
+    implementation "io.ktor:ktor-client-android:1.4.1"
+    implementation "io.ktor:ktor-client-okhttp:1.4.1"
+    implementation "io.ktor:ktor-client-gson:1.4.1"
+
+
 
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
@@ -94,15 +86,18 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:$androidx_fragment_version"
 
     //paging
-    implementation "androidx.paging:paging-runtime:$paging_version"
-    implementation "androidx.paging:paging-rxjava2:$paging_version"
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+    implementation "androidx.paging:paging-rxjava2-ktx:$paging_version"
 
-    implementation "androidx.lifecycle:lifecycle-viewmodel:2.3.0-beta01"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-beta01"
     kapt 'androidx.lifecycle:lifecycle-common-java8:2.2.0'
 
 
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
+
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    implementation "org.koin:koin-core:$koin_version"
 
 
 }

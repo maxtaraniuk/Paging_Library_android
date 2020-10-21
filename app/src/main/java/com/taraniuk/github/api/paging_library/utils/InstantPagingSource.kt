@@ -2,19 +2,18 @@ package com.taraniuk.github.api.paging_library.utils
 
 import androidx.paging.PagingSource
 import com.bumptech.glide.load.HttpException
+import com.taraniuk.github.api.paging_library.data.ktor.model.Data
 import com.taraniuk.github.api.paging_library.data.repository.InstantRepositoryImpl
-import com.taraniuk.github.api.paging_library.data.retrofit.model.Data
 import java.io.IOException
-import javax.inject.Inject
 
-class InstantPagingSource @Inject constructor(private val repository: InstantRepositoryImpl) :
+class InstantPagingSource(private val repository: InstantRepositoryImpl) :
     PagingSource<Int, Data>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Data> {
         val position = params.key ?: 1
 
         return try {
-            val response = repository.getAll(position, params.loadSize)
+            val response = repository.getAllAirlines(position, params.loadSize)
             val repos = response.data
             LoadResult.Page(
                 data = repos,
