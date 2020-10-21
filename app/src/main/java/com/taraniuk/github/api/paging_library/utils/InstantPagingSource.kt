@@ -8,7 +8,6 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-
 class InstantPagingSource @Inject constructor(private val repository: InstantRepositoryImpl) :
     RxPagingSource<Int, Data>() {
 

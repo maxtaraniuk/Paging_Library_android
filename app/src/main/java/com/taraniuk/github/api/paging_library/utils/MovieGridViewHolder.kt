@@ -27,8 +27,6 @@ class MovieGridViewHolder(private val view: View) : RecyclerView.ViewHolder(view
     private fun loadImage(url: String) {
         Glide.with(view.context)
             .load(url)
-            .placeholder(R.drawable.ic_launcher_foreground)
-            .error(R.drawable.ic_launcher_background)
             .into(image)
     }
 

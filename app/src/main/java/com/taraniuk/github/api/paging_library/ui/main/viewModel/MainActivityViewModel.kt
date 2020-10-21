@@ -1,6 +1,5 @@
 package com.taraniuk.github.api.paging_library.ui.main.viewModel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData

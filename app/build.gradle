@@ -2,6 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+
+
 
 android {
     compileSdkVersion 30
@@ -36,16 +39,9 @@ android {
 }
 
 
-
 dependencies {
     def paging_version = "3.0.0-alpha07"
-    def room_version = "2.3.0-alpha02"
     def dagger_version = "2.27"
-    def nav_version = "2.3.0"
-    def rx_version = "3.0.0"
-    def rx_android_version = "3.0.4"
-    def rx_adapter_version = "2.9.0"
-    def rx_binding_version = "4.0.0"
     def material_version = "1.2.0"
     def retrofit_version = "2.9.0"
     def gson_version = "2.3.0"
@@ -56,7 +52,6 @@ dependencies {
     def junit_version = "4.12"
     def androidx_appcompat_version = '1.2.0'
     def androidx_fragment_version = "1.2.5"
-
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -69,6 +64,9 @@ dependencies {
     //constraint layout
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
 
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
     //retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$gson_version"
@@ -80,11 +78,6 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
     implementation "com.google.dagger:dagger:$dagger_version"
-    //RxJava 3
-//    implementation "io.reactivex.rxjava3:rxandroid:$rx_version"
-//    implementation "io.reactivex.rxjava3:rxjava:$rx_android_version"
-//    implementation "com.jakewharton.rxbinding4:rxbinding:$rx_binding_version"
-//    implementation "com.jakewharton.rxbinding4:rxbinding-material:$rx_binding_version"
 
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
@@ -94,12 +87,11 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:$androidx_fragment_version"
 
     //paging
-    implementation "androidx.paging:paging-runtime:$paging_version"
-    implementation "androidx.paging:paging-rxjava2:$paging_version"
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+    implementation "androidx.paging:paging-rxjava2-ktx:$paging_version"
 
-    implementation "androidx.lifecycle:lifecycle-viewmodel:2.3.0-beta01"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-beta01"
     kapt 'androidx.lifecycle:lifecycle-common-java8:2.2.0'
-
 
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
